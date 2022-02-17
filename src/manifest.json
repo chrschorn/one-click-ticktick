@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "One-Click TickTick",
+  "description": "Save the current page to TickTick with only one click on the extension button.",
+  "version": "1.0",
+  "background": {
+    "service_worker": "js/service-worker.js"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "24": "icons/icon24.png",
+      "32": "icons/icon32.png"
+    },
+    "default_title": "Create Task"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png",
+    "256": "icons/icon256.png"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "notifications",
+    "contextMenus",
+    "activeTab",
+    "storage",
+    "sessions",
+    "identity",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://ticktick.com/oauth/token",
+    "https://api.ticktick.com/*"
+  ]
+}

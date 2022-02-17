@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>One-Click TickTick</title>
+    <link rel="stylesheet" href="/css/bulma.min.css">
+    <link rel="stylesheet" href="/css/bulma-switch.min.css">
+    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <script src="/lib/jquery-3.2.1.min.js"></script>
+    <script src="/js/store.js"></script>
+    <script src="/js/options.js"></script>
+  </head>
+  <body>
+
+  <nav class="navbar is-spaced is-light" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <div class="navbar-item">
+        <img src="/icons/icon256.png">
+      </div>
+      <div class="navbar-item">
+        <h1 class="title">
+          One-Click TickTick
+        </h1>
+      </div>
+    </div>
+  
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <a class="button is-outlined" href="">
+            <span class="icon "><i class="fa-brands fa-chrome"></i></span>
+            <span>Chrome Web Store</span>
+          </a>
+        </div>
+        <div class="navbar-item">
+          <a class="button is-outlined" href="https://github.com/chrschorn/one-click-ticktick" target="_blank">
+            <span class="icon "><i class="fa-brands fa-github"></i></span>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </div>
+  </nav>
+
+  <section id="optionsSection" class="section" style="display:none">
+    <div class="container is-max-desktop">
+      <div class="columns">
+
+        <div class="column">
+          <div class="block">
+            <h4 class="title is-4">
+              Task Settings
+            </h4>
+            <p class="subtitle">
+              New tasks will have the following settings
+            </p>
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Due Date</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <div class="select is-fullwidth">
+                      <select id="dueDate">
+                        <option value="-1">None</option>
+                        <option value="0">Today</option>
+                        <option value="1">Tomorrow</option>
+                        <option value="7">In 1 Week</option>
+                        <option value="30">In 1 Month</option>
+                      </select>
+                    </div>
+                  </div>
+                  <p class="help">Date will be set on each new task</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal mt-2">
+                <label class="label">Task Title</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <input id="selectionAsTitle" type="checkbox" name="switchRoundedDefault" class="switch is-rounded">
+                    <label for="selectionAsTitle">Use selected text as task title instead of tab title</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="block pt-4">
+            <h4 class="title is-4">
+              Side Effects
+            </h4>
+            <p class="subtitle">
+              Clicking the extension button can also have the following side effects
+            </p>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal mt-2">
+                <label class="label">Notifications</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <input id="showNotification" type="checkbox" name="switchRoundedDefault" class="switch is-rounded">
+                    <label for="showNotification">Show notification on task creation</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal mt-2">
+                <label class="label">Tab</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <input id="autoClose" type="checkbox" name="switchRoundedDefault" class="switch is-rounded">
+                    <label for="autoClose">Close current tab on task creation</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-quarter is-offset-1">
+          <article class="message is-info">
+            <div class="message-header">
+              <p>Problems, Suggestions?</p>
+            </div>
+            <div class="message-body">
+              Please submit feedback on the Chrome web store or on <a href="https://github.com/chrschorn/one-click-ticktick" target="_blank">GitHub</a>!
+            </div>
+          </article>
+          <article class="message is-link">
+            <div class="message-header">
+              <p>Tip Jar</p>
+            </div>
+            <div class="message-body has-text-centered">
+              
+              <a class="button is-rounded is-link" href="https://www.paypal.com/donate/?hosted_button_id=52Z66W73XG9SS">
+                <span class="icon"><i class="fa-solid fa-mug-hot"></i></span>
+                <span>Buy me a coffee</span>
+              </a>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="logoutSection" class="section">
+    <div class="container is-max-desktop has-text-centered">
+      <button id="logout" class="button is-outlined">Logout</button>
+    </div>
+  </section>
+
+  <section id="loginSection" class="section" style="display:none">
+    <div class="container is-max-desktop">
+      <article class="message is-info">
+        <div class="message-header">
+          <p>Login Required</p>
+        </div>
+        <div class="message-body">
+          <div class="block">
+            Please login to TickTick to use the extension. You're either logging in for the first time or your previous authentication has expired.
+          </div>
+          <div class="block">
+            <strong>Note:</strong> A new secure browser window will open in which you'll have to login to TickTick. Afterwards, you'll be asked to grant permission to this extension to create tasks on your behalf - in one click :) All data is either stored locally or in your browser's cloud-synced storage (if enabled by you). Please accept in order for this extension to work!
+          </div>
+        </div>
+      </article>
+      <div class="block has-text-centered">
+        <button id="login" class="button is-primary is-large js-modal-trigger" data-target="modal-js-example">
+          Login
+        </button>
+      </div>
+    </div>
+  </section>
+  </body>
+</html>
