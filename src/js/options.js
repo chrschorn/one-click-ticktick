@@ -8,13 +8,13 @@ var logout = function() {
     chrome.runtime.sendMessage({type: 'logout'}, function(response) {
         location.reload();
     });
-}
+};
 
 var setOptions = function(payload) {
     chrome.runtime.sendMessage({type: 'setOptions', payload: payload});
-}
+};
 
-var init = function(savedOptions) {
+var init = function() {
     chrome.runtime.sendMessage({type: 'isLoggedIn'}, function(response) {
         console.log("isLoggedIn:", response);
         $('#optionsSection').toggle(response);
@@ -35,8 +35,6 @@ var init = function(savedOptions) {
         $autoClose.prop('checked', options.autoClose);
     });
 
-    storage.location.addListeneer
-
     $('#login').click(login);
     $('#logout').click(logout);
 
@@ -53,8 +51,6 @@ var init = function(savedOptions) {
         setOptions({autoClose: $autoClose.is(':checked')});
     })
 };
-
-
 
 $(document).ready(function() {
     init();
