@@ -4,7 +4,8 @@
   "description": "Save the current page to TickTick with only one click on the extension button.",
   "version": "1.0",
   "background": {
-    "service_worker": "js/service-worker.js"
+    "service_worker": "/service-worker.js",
+    "type": "module"
   },
   "action": {
     "default_icon": {

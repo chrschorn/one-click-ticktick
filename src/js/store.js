@@ -1,4 +1,4 @@
-var storage = {
+export const storage = {
     location: chrome.storage.sync,
     defaults: {showNotification: true, selectionAsTitle: false, autoClose: false, dueDate: -1},
     set: function(obj) {

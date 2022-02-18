@@ -1,8 +1,10 @@
-var ticktickApi = {
+import {storage} from '/js/store.js';
+
+export const ticktickApi = {
     clientId: 'TF8YKgsK67BA1htYrS',
     clientSecret: '&U2rl3Ci1(hl(zS!DVC6Dt^$#&v2cO07',
     authorized: async function() {
-        token = (await storage.get('token')).token;
+        let token = (await storage.get('token')).token;
         return !!token;
     },
     task: {
