@@ -2,13 +2,13 @@
 
 # One-Click TickTick
 
-*One-Click TickTick* is an open source Chrome extension that simplifies creating a TickTick tasks from a website. It's available on the [Chrome Web Store](). 
+*One-Click TickTick* is an open source Chrome extension that simplifies creating a TickTick tasks from a website. It's available on the [Chrome Web Store](https://chrome.google.com/webstore/detail/one-click-ticktick/nbmkldaonngpkjagofgclbioanahipdp). 
 
 If you frequently create TickTick tasks linking to a website you visit - maybe to visit again later or to remember something - One-Click TickTick is for you! Login once and saving a link to the current page is just one click away. 
 
 ## Installation
 
-1. Go to the [Chrome Web Store Page]()
+1. Go to the [Chrome Web Store Page](https://chrome.google.com/webstore/detail/one-click-ticktick/nbmkldaonngpkjagofgclbioanahipdp)
 2. Install the extension
 3. Click the extension button, which will take you to the options page, which explains the login+authentication procedure.
 
