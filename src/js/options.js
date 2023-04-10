@@ -23,14 +23,18 @@ var init = function() {
     });
 
     $dueDate = $('#dueDate');
-    $selectionAsTitle = $('#selectionAsTitle');
+    $taskTitle = $('#taskTitle');
     $showNotification = $('#showNotification');
     $autoClose = $('#autoClose');
+    $targetList = $('#targetList');
+    $taskPriority = $('#taskPriority')
 
     chrome.runtime.sendMessage({type: 'getOptions'}, function(options) {
         console.log("Options:", options);
         $dueDate.val(options.dueDate);
-        $selectionAsTitle.prop('checked', options.selectionAsTitle);
+        $taskTitle.val(options.taskTitle);
+        $targetList.val(options.targetListId);
+        $taskPriority.val(options.taskPriority);
         $showNotification.prop('checked', options.showNotification);
         $autoClose.prop('checked', options.autoClose);
     });
@@ -44,11 +48,17 @@ var init = function() {
     $showNotification.change(function() {
         setOptions({showNotification: $showNotification.is(':checked')});
     });
-    $selectionAsTitle.change(function() {
-        setOptions({selectionAsTitle: $selectionAsTitle.is(':checked')});
+    $taskTitle.change(function() {
+        setOptions({taskTitle: $taskTitle.val()});
     });
     $autoClose.change(function() {
         setOptions({autoClose: $autoClose.is(':checked')});
+    });
+    $targetList.change(function() {
+        setOptions({targetListId: $targetList.val()})
+    });
+    $taskPriority.change(function() {
+        setOptions({taskPriority: $taskPriority.val()})
     })
 };
 

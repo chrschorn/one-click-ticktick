@@ -53,6 +53,47 @@
             <p class="subtitle">
               New tasks will have the following settings
             </p>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Task Title</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <div class="select is-fullwidth">
+                      <select id="taskTitle">
+                        <option value="tabTitle">Tab Title</option>
+                        <option value="selectedText">Selected Text</option>
+                      </select>
+                    </div>
+                  </div>
+                  <p class="help">
+                    "Selected text" only works when using the right-click menu to create tasks.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Target List</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <input id="targetList" class="input" type="text" placeholder="List ID (leave empty = Inbox)">
+                  </div>
+                  <p class="help">
+                    Leave empty for new tasks to land in your TickTick Inbox.
+                  </p>
+                  <p class="help">
+                    To customize, visit the desired list in your browser and look at the URL, e.g. <span class="is-family-monospace">ticktick.com/webapp/#p/<span class="has-text-weight-bold">0f7f0ba69f32550a87cfc4d3</span>/tasks</span>. Copy the list ID to the above text field (in this case the content should be <span class="is-family-monospace">0f7f0ba69f32550a87cfc4d3</span>).
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <div class="field is-horizontal">
               <div class="field-label is-normal">
                 <label class="label">Due Date</label>
@@ -70,24 +111,34 @@
                       </select>
                     </div>
                   </div>
-                  <p class="help">Date will be set on each new task</p>
                 </div>
               </div>
             </div>
 
             <div class="field is-horizontal">
-              <div class="field-label is-normal mt-2">
-                <label class="label">Task Title</label>
+              <div class="field-label is-normal">
+                <label class="label">Priority</label>
               </div>
               <div class="field-body">
                 <div class="field">
                   <div class="control">
-                    <input id="selectionAsTitle" type="checkbox" name="switchRoundedDefault" class="switch is-rounded">
-                    <label for="selectionAsTitle">Use selected text as task title instead of tab title</label>
+                    <div class="select is-fullwidth">
+                      <select id="taskPriority">
+                        <option value="0">None</option>
+                        <option value="1">Low</option>
+                        <option value="3">Medium</option>
+                        <option value="5">High</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
+
+
+            
+
           </div>
 
 
