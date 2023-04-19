@@ -16,7 +16,7 @@ export async function oneClickTickTick(tab, contextInfo) {
     };
 
     if (contextInfo && contextInfo.selectionText) {
-        if (options.selectionAsTitle) {
+        if (options.taskTitle == "selectedText") {
             taskData.content = taskData.title;
             taskData.title = '[' + contextInfo.selectionText + '](' + tab.url + ')';
             plainTitle = contextInfo.selectionText;
@@ -36,6 +36,14 @@ export async function oneClickTickTick(tab, contextInfo) {
         dateStr = dateStr.replace('Z', '+0000')
         taskData.dueDate = dateStr;
         taskData.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    }
+
+    if (options.targetListId) {
+        taskData.projectId = options.targetListId;
+    }
+
+    if (options.taskPriority) {
+        taskData.priority = options.taskPriority;
     }
 
     const task = ticktickApi.task.create(taskData);

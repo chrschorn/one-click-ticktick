@@ -1,6 +1,13 @@
 export const storage = {
     location: chrome.storage.sync,
-    defaults: {showNotification: true, selectionAsTitle: false, autoClose: false, dueDate: -1},
+    defaults: {
+        showNotification: true, 
+        taskTitle: "tabTitle", 
+        autoClose: false, 
+        dueDate: -1, 
+        targetListId: null,
+        taskPriority: 0
+    },
     set: function(obj) {
         return new Promise ((resolve, reject) => {
             storage.location.set(obj, function() {
