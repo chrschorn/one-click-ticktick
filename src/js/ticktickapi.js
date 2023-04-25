@@ -1,47 +1,42 @@
 import {storage} from '/js/store.js';
 
 export const ticktickApi = {
-    clientId: 'TF8YKgsK67BA1htYrS',
-    clientSecret: '&U2rl3Ci1(hl(zS!DVC6Dt^$#&v2cO07',
+    clientId: 'A6oZTY3Ph6gWb5NjtN',
+    clientSecret: '^(LIIvd9*@PKKTN_(L3Qbh6mh_P1Cp#2',
     authorized: async function() {
         let token = (await storage.get('token')).token;
         return !!token;
     },
+    rest: async function(method, path, data) {
+        const token = (await storage.get('token')).token;
+
+        var config = {
+            method: method,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+            }
+        }
+
+        if (data)
+            config.body = JSON.stringify(data);
+
+        const response = await fetch('https://api.ticktick.com/open/v1/' + path, config);
+        return response;
+    },
     task: {
         create: async function(data) {
-            const token = (await storage.get('token')).token;
-            const response = await fetch('https://api.ticktick.com/open/v1/task', {
-                method: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ' + token,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-            return response;
+            var projects = await ticktickApi.project.list();
+            console.log(projects.body);
+            return ticktickApi.rest('POST', 'task', data);
         },
         complete: async function(projectId, taskId) {
-            const token = (await storage.get('token')).token;
-            const response = await fetch('https://api.ticktick.com/open/v1/project/' + projectId + '/task/' + taskId + '/complete', {
-                method: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ' + token,
-                    'Content-Type': 'application/json'
-                }
-            });
-            return response;
-        },
-        get: async function(projectId, taskId) {
-            const token = (await storage.get('token')).token;
-            console.log(token);
-            const response = await fetch('https://api.ticktick.com/open/v1/project/' + projectId + '/task/' + taskId, {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + token,
-                    'Content-Type': 'application/json'
-                },
-            });
-            return response;
+            return ticktickApi.rest('POST', 'project/' + projectId + '/task/' + taskId + '/complete');
+        }
+    },
+    project: {
+        list: async function() {
+            return ticktickApi.rest('GET', 'project'); // not working yet
         }
     },
     logout: function() {
@@ -52,7 +47,7 @@ export const ticktickApi = {
     login: function() {
         var self = this;
         var redirectUri = chrome.identity.getRedirectURL();
-        var scope = 'tasks:write';
+        var scope = 'tasks:read tasks:write';
     
         var authURL = new URL('https://ticktick.com/oauth/authorize');
         authURL.searchParams.append('client_id', self.clientId); 

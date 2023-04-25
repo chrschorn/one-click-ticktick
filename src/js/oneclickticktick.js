@@ -7,6 +7,18 @@ export async function oneClickTickTick(tab, contextInfo) {
         return;
     }
 
+    var projects = await ticktickApi.project.list();
+    projects = await projects.json();
+
+    projects = projects.filter(proj => !proj.closed);
+    projects.sort(function(a, b) {
+        return (a.groupId && a.groupId.localeCompare(b.groupId)) || a.sortOrder - b.sortOrder;
+    });
+    var no_groupId_projects = projects.filter(proj => !proj.groupId);
+    projects = projects.filter(proj => proj.groupId);
+    const projects_ordered = [{id: 'inbox'}].concat(no_groupId_projects, projects);
+    console.log(projects_ordered);
+
     const options = await storage.loadOptions();
 
     var plainTitle = tab.title;
