@@ -27,13 +27,15 @@ var init = function() {
     $showNotification = $('#showNotification');
     $autoClose = $('#autoClose');
     $targetList = $('#targetList');
-    $taskPriority = $('#taskPriority')
+    $taskPriority = $('#taskPriority');
+    $tagsList = $('#tagsList');
 
     chrome.runtime.sendMessage({type: 'getOptions'}, function(options) {
         console.log("Options:", options);
         $dueDate.val(options.dueDate);
         $taskTitle.val(options.taskTitle);
         $targetList.val(options.targetListId);
+        $tagsList.val(options.tags);
         $taskPriority.val(options.taskPriority);
         $showNotification.prop('checked', options.showNotification);
         $autoClose.prop('checked', options.autoClose);
@@ -55,11 +57,14 @@ var init = function() {
         setOptions({autoClose: $autoClose.is(':checked')});
     });
     $targetList.change(function() {
-        setOptions({targetListId: $targetList.val()})
+        setOptions({targetListId: $targetList.val().trim()});
+    });
+    $tagsList.change(function() {
+        setOptions({tags: $tagsList.val().trim()});
     });
     $taskPriority.change(function() {
-        setOptions({taskPriority: $taskPriority.val()})
-    })
+        setOptions({taskPriority: $taskPriority.val()});
+    });
 };
 
 $(document).ready(function() {
