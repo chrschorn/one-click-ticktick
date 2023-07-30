@@ -74,7 +74,7 @@ export async function oneClickTickTick(tab, contextInfo) {
             type: "basic",
             buttons: [
                 {title: 'Show Task...'},
-                {title: 'Complete Task'}
+                {title: 'Delete Task'}
             ]
         };
 
@@ -146,7 +146,7 @@ function createNotification(notificationId, options, taskPromise) {
                             chrome.tabs.create({ url: 'https://ticktick.com/webapp/#p/' + data.projectId + '/tasks/' + data.id });
                             chrome.notifications.clear(id);
                         } else if (buttonIndex === 1) {
-                            ticktickApi.task.complete(data.projectId, data.id);
+                            ticktickApi.task.delete(data.projectId, data.id);
                             chrome.notifications.clear(id);
                         }
                     });
