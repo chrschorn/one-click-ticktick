@@ -6,7 +6,8 @@ export const storage = {
         autoClose: false, 
         dueDate: -1, 
         targetListId: null,
-        taskPriority: 0
+        taskPriority: 0,
+        tags: ""
     },
     set: function(obj) {
         return new Promise ((resolve, reject) => {

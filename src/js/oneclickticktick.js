@@ -46,6 +46,23 @@ export async function oneClickTickTick(tab, contextInfo) {
         taskData.priority = options.taskPriority;
     }
 
+    if (options.tags) {
+        // example: "  tag1   tag2" -> "#tag1 #tag2"
+        let tags = options.tags
+            .split(" ") 
+            .filter(tag => tag)  // remove empty tags (i.e. extra spaces)
+            .map(tag => '#' + tag.trim())
+            .join(" ");
+
+        if (taskData.content) {
+            taskData.content += "\n\n";
+        } else {
+            taskData.content = "";
+        }
+
+        taskData.content += "Tags: " + tags
+    }
+
     const task = ticktickApi.task.create(taskData);
     var notification = null;
 
