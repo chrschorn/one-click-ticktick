@@ -1,6 +1,34 @@
 import {storage} from '/js/store.js';
 import {ticktickApi} from '/js/ticktickapi.js';
 
+
+async function getTabContentAsMarkdown(tab) {
+    try {
+        var result = await chrome.scripting.executeScript({
+            target : {tabId : tab.id},
+            files : [
+                '/lib/readability-0.4.4.js',
+                '/lib/turndown-7.1.2.js',
+                '/js/contentscript.js'
+            ],
+        });
+    } catch (error) {
+        console.log(error);
+        return "";
+    }
+
+    if (!Array.isArray(result) || result.length == 0)
+        return "";
+
+    var markdown = result[0].result;
+    // Finds # only if not immediately followed by whitespace or \ / # " : * ? < > |
+    // these symbols all invalidate a string that would otherwise be recognized as a tag
+    // by TickTick. We place an invalid symbol after each found #.
+    const removeTagsRegex = /#(?![\s\\\/#":*?<>|])/g;
+    markdown = markdown.replace(removeTagsRegex, '#/');
+    return markdown;
+}
+
 export async function oneClickTickTick(tab, contextInfo) {
     if(!await ticktickApi.authorized()) {
         chrome.runtime.openOptionsPage();
@@ -17,12 +45,19 @@ export async function oneClickTickTick(tab, contextInfo) {
 
     if (contextInfo && contextInfo.selectionText) {
         if (options.taskTitle == "selectedText") {
-            taskData.content = taskData.title;
+            if (options.includePageContent) {
+                taskData.content = "# " + taskData.title;
+                taskData.content += "\n\n" + await getTabContentAsMarkdown(tab);
+            } else {
+                taskData.content = taskData.title;
+            }
             taskData.title = '[' + contextInfo.selectionText + '](' + tab.url + ')';
             plainTitle = contextInfo.selectionText;
         } else {
             taskData.content = contextInfo.selectionText;
         }
+    } else if (options.includePageContent) {
+        taskData.content = await getTabContentAsMarkdown(tab);
     }
 
     var dueDateNum = Number(options.dueDate);
