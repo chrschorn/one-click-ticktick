@@ -29,6 +29,7 @@ var init = function() {
     $targetList = $('#targetList');
     $taskPriority = $('#taskPriority');
     $tagsList = $('#tagsList');
+    $includePageContent = $('#includePageContent');
 
     chrome.runtime.sendMessage({type: 'getOptions'}, function(options) {
         console.log("Options:", options);
@@ -39,6 +40,7 @@ var init = function() {
         $taskPriority.val(options.taskPriority);
         $showNotification.prop('checked', options.showNotification);
         $autoClose.prop('checked', options.autoClose);
+        $includePageContent.prop('checked', options.includePageContent)
     });
 
     $('#login').click(login);
@@ -64,6 +66,9 @@ var init = function() {
     });
     $taskPriority.change(function() {
         setOptions({taskPriority: $taskPriority.val()});
+    });
+    $includePageContent.change(function() {
+        setOptions({includePageContent: $includePageContent.is(':checked')});
     });
 };
 

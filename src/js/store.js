@@ -7,7 +7,8 @@ export const storage = {
         dueDate: -1, 
         targetListId: null,
         taskPriority: 0,
-        tags: ""
+        tags: "",
+        includePageContent: true
     },
     set: function(obj) {
         return new Promise ((resolve, reject) => {
