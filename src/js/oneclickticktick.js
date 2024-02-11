@@ -1,12 +1,12 @@
-import {storage} from '/js/store.js';
-import {ticktickApi} from '/js/ticktickapi.js';
+import { storage } from '/js/store.js';
+import { ticktickApi } from '/js/ticktickapi.js';
 
 
 async function getTabContentAsMarkdown(tab) {
     try {
         var result = await chrome.scripting.executeScript({
-            target : {tabId : tab.id},
-            files : [
+            target: { tabId: tab.id },
+            files: [
                 '/lib/readability-0.4.4.js',
                 '/lib/turndown-7.1.2.js',
                 '/js/contentscript.js'
@@ -30,7 +30,7 @@ async function getTabContentAsMarkdown(tab) {
 }
 
 export async function oneClickTickTick(tab, contextInfo) {
-    if(!await ticktickApi.authorized()) {
+    if (!await ticktickApi.authorized()) {
         chrome.runtime.openOptionsPage();
         return;
     }
@@ -71,6 +71,7 @@ export async function oneClickTickTick(tab, contextInfo) {
         dateStr = dateStr.replace('Z', '+0000')
         taskData.dueDate = dateStr;
         taskData.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        taskData.isAllDay = true;  // required to not show up as "at 00:00"
     }
 
     if (options.targetListId) {
@@ -84,7 +85,7 @@ export async function oneClickTickTick(tab, contextInfo) {
     if (options.tags) {
         // example: "  tag1   tag2" -> "#tag1 #tag2"
         let tags = options.tags
-            .split(" ") 
+            .split(" ")
             .filter(tag => tag)  // remove empty tags (i.e. extra spaces)
             .map(tag => '#' + tag.trim())
             .join(" ");
@@ -108,8 +109,8 @@ export async function oneClickTickTick(tab, contextInfo) {
             iconUrl: "/icons/icon256.png",
             type: "basic",
             buttons: [
-                {title: 'Show Task...'},
-                {title: 'Delete Task'}
+                { title: 'Show Task...' },
+                { title: 'Delete Task' }
             ]
         };
 
@@ -117,7 +118,7 @@ export async function oneClickTickTick(tab, contextInfo) {
     }
 
     if (options.autoClose) {
-        chrome.tabs.remove(tab.id, function(){});
+        chrome.tabs.remove(tab.id, function () { });
     }
 
     try {
@@ -133,7 +134,7 @@ export async function oneClickTickTick(tab, contextInfo) {
             const data = await response.clone().json();
             console.log("Success: ", data);
         }
-    } catch(error) {
+    } catch (error) {
         console.log(error);
 
         let updatedContent = {
@@ -153,7 +154,7 @@ export async function oneClickTickTick(tab, contextInfo) {
         if (options.autoClose) {
             // try to recover the tab, only try it on the last session that was closed
             // otherwise it might restore an unrelated session
-            chrome.sessions.getRecentlyClosed({maxResults: 1}, function (sessions) {
+            chrome.sessions.getRecentlyClosed({ maxResults: 1 }, function (sessions) {
                 if (sessions.length > 0 && sessions[0].tab && sessions[0].tab.index === tab.index) {
                     chrome.sessions.restore(sessions[0].tab.sessionId);
                 }
@@ -164,13 +165,13 @@ export async function oneClickTickTick(tab, contextInfo) {
 
 function createNotification(notificationId, options, taskPromise) {
     return new Promise((resolve, reject) => {
-        chrome.notifications.create(notificationId, options, function(createdId) {
+        chrome.notifications.create(notificationId, options, function (createdId) {
             if (chrome.runtime.lastError) {
                 reject(chrome.runtime.lastError);
             }
 
-            var handler = function(id, buttonIndex, retries) {
-                if(id != createdId) {
+            var handler = function (id, buttonIndex, retries) {
+                if (id != createdId) {
                     return;
                 }
 
@@ -197,9 +198,9 @@ function createNotification(notificationId, options, taskPromise) {
 
 export function getSelectionInfo(info, tab, callback) {
     chrome.scripting.executeScript({
-        target: {tabId: tab.id}, 
+        target: { tabId: tab.id },
         function: () => getSelection().toString()
-    }, function(response) {
+    }, function (response) {
         var result = response[0].result;
         var selection = info.selectionText;
 
