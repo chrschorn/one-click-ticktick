@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>One-Click TickTick</title>
-    <link rel="stylesheet" href="/css/bulma.min.css">
-    <link rel="stylesheet" href="/css/bulma-switch.min.css">
-    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
-    <script src="/lib/jquery-3.2.1.min.js"></script>
-    <script src="/js/options.js"></script>
-  </head>
-  <body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One-Click TickTick</title>
+  <link rel="stylesheet" href="/css/bulma.min.css">
+  <link rel="stylesheet" href="/css/bulma-switch.min.css">
+  <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+  <script src="/lib/jquery-3.2.1.min.js"></script>
+  <script src="/js/options.js"></script>
+</head>
+
+<body>
 
   <nav class="navbar is-spaced is-light" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
@@ -23,22 +25,24 @@
         </h1>
       </div>
     </div>
-  
 
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <a class="button is-outlined" href="https://chrome.google.com/webstore/detail/one-click-ticktick/nbmkldaonngpkjagofgclbioanahipdp" target="_blank">
-            <span class="icon "><i class="fa-brands fa-chrome"></i></span>
-            <span>Chrome Web Store</span>
-          </a>
-        </div>
-        <div class="navbar-item">
-          <a class="button is-outlined" href="https://github.com/chrschorn/one-click-ticktick" target="_blank">
-            <span class="icon "><i class="fa-brands fa-github"></i></span>
-            <span>GitHub</span>
-          </a>
-        </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <a class="button is-outlined"
+          href="https://chrome.google.com/webstore/detail/one-click-ticktick/nbmkldaonngpkjagofgclbioanahipdp"
+          target="_blank">
+          <span class="icon "><i class="fa-brands fa-chrome"></i></span>
+          <span>Chrome Web Store</span>
+        </a>
       </div>
+      <div class="navbar-item">
+        <a class="button is-outlined" href="https://github.com/chrschorn/one-click-ticktick" target="_blank">
+          <span class="icon "><i class="fa-brands fa-github"></i></span>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
   </nav>
 
   <section id="optionsSection" class="section" style="display:none">
@@ -82,7 +86,8 @@
               <div class="field-body">
                 <div class="field">
                   <div class="control">
-                    <input id="includePageContent" type="checkbox" name="switchRoundedDefault" class="switch is-rounded">
+                    <input id="includePageContent" type="checkbox" name="switchRoundedDefault"
+                      class="switch is-rounded">
                     <label for="includePageContent">Include webpage content in task description</label>
                   </div>
                 </div>
@@ -102,7 +107,11 @@
                     Leave empty for new tasks to land in your TickTick Inbox.
                   </p>
                   <p class="help">
-                    To customize, visit the desired list in your browser and look at the URL, e.g. <span class="is-family-monospace">ticktick.com/webapp/#p/<span class="has-text-weight-bold">0f7f0ba69f32550a87cfc4d3</span>/tasks</span>. Copy the list ID to the above text field (in this case the content should be <span class="is-family-monospace">0f7f0ba69f32550a87cfc4d3</span>).
+                    To customize, visit the desired list in your browser and look at the URL, e.g. <span
+                      class="is-family-monospace">ticktick.com/webapp/#p/<span
+                        class="has-text-weight-bold">0f7f0ba69f32550a87cfc4d3</span>/tasks</span>. Copy the list ID to
+                    the above text field (in this case the content should be <span
+                      class="is-family-monospace">0f7f0ba69f32550a87cfc4d3</span>).
                   </p>
                 </div>
               </div>
@@ -164,13 +173,7 @@
                 </div>
               </div>
             </div>
-
-
-
-            
-
           </div>
-
 
           <div class="block pt-4">
             <h4 class="title is-4">
@@ -216,7 +219,8 @@
               <p>Problems, Suggestions?</p>
             </div>
             <div class="message-body">
-              Please submit feedback on the <a href="https://chrome.google.com/webstore/detail/one-click-ticktick/nbmkldaonngpkjagofgclbioanahipdp/support" target="_blank">Chrome web store</a> or on <a href="https://github.com/chrschorn/one-click-ticktick" target="_blank">GitHub</a>!
+              Please report bugs or issues on <a href="https://github.com/chrschorn/one-click-ticktick/issues"
+                target="_blank">GitHub</a>!
             </div>
           </article>
           <article class="message is-link">
@@ -224,7 +228,7 @@
               <p>Tip Jar</p>
             </div>
             <div class="message-body has-text-centered">
-              
+
               <a class="button is-rounded is-link" href="https://www.paypal.com/donate/?hosted_button_id=52Z66W73XG9SS">
                 <span class="icon"><i class="fa-solid fa-mug-hot"></i></span>
                 <span>Buy me a coffee</span>
@@ -251,10 +255,14 @@
         </div>
         <div class="message-body">
           <div class="block">
-            Please login to TickTick to use the extension. You're either logging in for the first time or your previous authentication has expired.
+            Please login to TickTick to use the extension. You're either logging in for the first time or your previous
+            authentication has expired.
           </div>
           <div class="block">
-            <strong>Note:</strong> A new secure browser window will open in which you'll have to login to TickTick. Afterwards, you'll be asked to grant permission to this extension to create tasks on your behalf - in one click :) All data is either stored locally or in your browser's cloud-synced storage (if enabled by you). Please accept in order for this extension to work!
+            <strong>Note:</strong> A new secure browser window will open in which you'll have to login to TickTick.
+            Afterwards, you'll be asked to grant permission to this extension to create tasks on your behalf - in one
+            click :) All data is either stored locally or in your browser's cloud-synced storage (if enabled by you).
+            Please accept in order for this extension to work!
           </div>
         </div>
       </article>
@@ -265,5 +273,6 @@
       </div>
     </div>
   </section>
-  </body>
+</body>
+
 </html>
